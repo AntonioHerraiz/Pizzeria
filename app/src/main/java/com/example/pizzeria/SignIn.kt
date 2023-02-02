@@ -7,6 +7,8 @@ import android.widget.Toast
 import com.example.pizzeria.databinding.ActivitySignInBinding
 import com.example.pizzeria.databinding.ActivitySignUpBinding
 
+var currentUser : User = User("", "", "")
+
 class SignIn : AppCompatActivity() {
     private lateinit var binding : ActivitySignInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,11 +17,18 @@ class SignIn : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signinBtn.setOnClickListener{
-            validate()
+           if(validate()) {
+               signIn()
+           }
+
         }
 
     }
-    private fun validate(){
+    private  fun signIn(){
+        val intent : Intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+    private fun validate() : Boolean{
         var email = binding.emailEditText.text.toString()
         var password = binding.passwordEditText.text.toString()
         var result = true
@@ -32,6 +41,10 @@ class SignIn : AppCompatActivity() {
         for (user in userList){
             if (user.email.equals(email) && user.password.equals(password)){
                 Toast.makeText(this, "Inicio de sesión satisfactorio", Toast.LENGTH_SHORT).show()
+                currentUser.name = user.name.toString()
+                currentUser.email = user.email.toString()
+                currentUser.password = user.email.toString()
+
             }
             else{
                 result = false
@@ -45,10 +58,7 @@ class SignIn : AppCompatActivity() {
             }
         }
 
-        if (result){
-            val intent : Intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        return  result
     }
 
 

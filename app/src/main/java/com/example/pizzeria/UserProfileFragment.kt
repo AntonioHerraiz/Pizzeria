@@ -1,10 +1,18 @@
 package com.example.pizzeria
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.pizzeria.databinding.FragmentMenuBinding
+import com.example.pizzeria.databinding.FragmentUserProfileBinding
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +28,7 @@ class UserProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var binding: FragmentUserProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +42,61 @@ class UserProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentUserProfileBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_profile, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.userName.text = currentUser.name
+        binding.emailUser.text = currentUser.email
+        Picasso.get().load("https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png")
+            .into(binding.fotoUser)
+
+        binding.btnCerrar.setOnClickListener {
+            currentUser.name = ""
+            currentUser.email = ""
+            currentUser.password = ""
+
+            Toast.makeText(requireContext(), "Ha cerrado sesión", Toast.LENGTH_SHORT).show()
+
+            val intent: Intent = Intent(requireContext(), SignIn::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnEliminar.setOnClickListener{
+            currentUser.name = ""
+            currentUser.email = ""
+            currentUser.password = ""
+
+            userList = mutableListOf()
+
+            Toast.makeText(requireContext(), "Ha borrado la cuenta", Toast.LENGTH_SHORT).show()
+
+            val intent: Intent = Intent(requireContext(), SignUp::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnPapelera.setOnClickListener{
+            Picasso.get().load("https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png").into(binding.fotoUser)
+        }
+        binding.btnLoad.setOnClickListener{
+            val openGallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(openGallery, -1)
+        }
+
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == -1) {
+            val imageUri: Uri? = data?.data
+            binding.fotoUser.setImageURI(imageUri)
+
+        }
     }
 
     companion object {

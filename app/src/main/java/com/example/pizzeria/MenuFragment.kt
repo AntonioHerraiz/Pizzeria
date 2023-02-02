@@ -57,7 +57,7 @@ class MenuFragment : Fragment() {
             ),
             Pizza(
                 "Jamon queso",
-                "mozarrella / jamon york / tomate",
+                "Mozarrella / Jamon york / tomate",
                 "https://newluxbrand.com/wp-content/uploads/2022/01/pizza-jamo%CC%81n-y-queso-Newlux.jpg",
                 7.5
             ),
@@ -68,7 +68,7 @@ class MenuFragment : Fragment() {
                 8.6
             ),
             Pizza(
-                "Champiñón ",
+                "Champiñón",
                 "champiñon / tomate",
                 "https://www.2mandarinasenmicocina.com/wp-content/uploads/2018/01/pizza-de-champi%C3%B1ones-thermomix-receta.jpg",
                 10.0

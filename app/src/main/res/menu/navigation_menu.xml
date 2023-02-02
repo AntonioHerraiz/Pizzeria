@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Inicio"
+    <item
         android:id="@+id/inicio"
-        android:icon="@drawable/ic_baseline_home_24" />
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Inicio" />
 
-    <item android:title="Carta"
+    <item
         android:id="@+id/carta"
-        android:icon="@drawable/ic_baseline_menu_book_24" />
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="Carta" />
 
-    <item android:title="Perfil"
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_baseline_add_24"
+        android:title="Añadir" />
+
+    <item
         android:id="@+id/perfil"
-        android:icon="@drawable/ic_baseline_person_24"/>
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Perfil" />
+
 </menu>

@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(MenuFragment())
                 R.id.perfil ->
                     replaceFragment(UserProfileFragment())
+                R.id.add ->
+                    replaceFragment(AddFragment())
                 else -> {
                 }
             }

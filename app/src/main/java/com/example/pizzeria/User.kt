@@ -1,7 +1,11 @@
 package com.example.pizzeria
 
+import android.os.Parcelable
+
+
 data class User(
-    val name: String,
-    val email: String,
-    val password: String
+    var name: String?,
+    var email: String?,
+    var password: String?
 )
+
