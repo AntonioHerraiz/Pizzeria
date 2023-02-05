@@ -15,6 +15,10 @@
     <string name="checkIngredientes">Selecciona los ingredientes</string>
     <string name="addBtn">Añadir sugerencia</string>
     <string name="checkboxIng">Ingrediente</string>
+    <string name="alerta">Alerta</string>
+    <string name="seguridad">¿Desea eliminar la cuenta?</string>
+    <string name="cancelar">No</string>
+    <string name="aceptar">Sí</string>
 
 
 

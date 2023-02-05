@@ -1,5 +1,6 @@
 package com.example.pizzeria
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -66,16 +67,29 @@ class UserProfileFragment : Fragment() {
         }
 
         binding.btnEliminar.setOnClickListener{
-            currentUser.name = ""
-            currentUser.email = ""
-            currentUser.password = ""
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle(R.string.alerta)
+                .setMessage(R.string.seguridad)
+                .setPositiveButton(R.string.aceptar) { view, _ ->
+                    currentUser.name = ""
+                    currentUser.email = ""
+                    currentUser.password = ""
 
-            userList = mutableListOf()
+                    userList = mutableListOf()
 
-            Toast.makeText(requireContext(), "Ha borrado la cuenta", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Ha borrado la cuenta", Toast.LENGTH_SHORT).show()
 
-            val intent: Intent = Intent(requireContext(), SignUp::class.java)
-            startActivity(intent)
+                    val intent: Intent = Intent(requireContext(), SignUp::class.java)
+                    view.dismiss()
+                    startActivity(intent)
+                }
+                .setNegativeButton(R.string.cancelar) { view, _ ->
+                    view.dismiss()
+                }
+                .setCancelable(false)
+                .create()
+
+        dialog.show()
         }
 
         binding.btnPapelera.setOnClickListener{
