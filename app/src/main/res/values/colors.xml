@@ -12,5 +12,6 @@
     <color name="green">#009246</color>
     <color name="darkGrey">#272727</color>
     <color name="lightGrey">#BFBFBF</color>
+    <color name="veryLightGrey">#F1F0F0</color>
     <color name="grey">#9E9E9E</color>
 </resources>

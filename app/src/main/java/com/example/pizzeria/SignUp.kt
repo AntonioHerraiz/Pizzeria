@@ -86,6 +86,8 @@ class SignUp : AppCompatActivity() {
             result = false
         }
         if (password.isNotEmpty() && password2.isNotEmpty() && password2 != password){
+            binding.password2EditText.error = "Las contraseñas no coinciden"
+            binding.passwordEditText.error = "Las contraseñas no coinciden"
             result = false
         }
         return result
