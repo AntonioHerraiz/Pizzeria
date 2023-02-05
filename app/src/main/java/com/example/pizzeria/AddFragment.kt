@@ -23,8 +23,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [AddFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+<<<<<<< HEAD
 
 var sugerenciaList = mutableListOf<Sugerencia>()
+=======
+>>>>>>> github/main
 class AddFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -33,7 +36,10 @@ class AddFragment : Fragment() {
     private lateinit var binding: FragmentAddBinding
     private lateinit var ingredients: Array<String>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> github/main
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,9 +64,12 @@ class AddFragment : Fragment() {
 
         ingredients = arrayOf("Champiñones", "Chocolate", "Tomate", "Queso Brie", "Jamón", "Atún")
         recyclerView.adapter = IngredientAdapter(ingredients)
+<<<<<<< HEAD
         val sugerenciaRecyclerView: RecyclerView = binding.sugerenciasRecycler
         sugerenciaRecyclerView.layoutManager = LinearLayoutManager(this.context)
         sugerenciaRecyclerView.adapter = SugerenciaAdapter(sugerenciaList)
+=======
+>>>>>>> github/main
 
         binding.addSugerenciaBtn.setOnClickListener{
             val name: String = binding.namePizza.text.toString()
@@ -68,6 +77,7 @@ class AddFragment : Fragment() {
 
             val ingredientsList = adapter.getCheckBoxes()
             if (validate(name, ingredientsList)){
+<<<<<<< HEAD
                 val sugerencia = Sugerencia(name, ingredientsList, currentUser, Date())
                 Log.i("Creando sugerencia", " $sugerencia")
                 val emptyList = mutableListOf<String>()
@@ -75,6 +85,12 @@ class AddFragment : Fragment() {
                 sugerenciaList.add(sugerencia)
                 Toast.makeText(requireContext(), "Sugerencia añadida", Toast.LENGTH_SHORT).show()
                 (sugerenciaRecyclerView.adapter as SugerenciaAdapter).notifyDataSetChanged()
+=======
+                val sugerencia = Sugerencia(name, ingredientsList)
+                // Se guardaría en la API
+                Log.i("Creando sugerencia", " " + sugerencia)
+                Toast.makeText(requireContext(), "Sugerencia añadida", Toast.LENGTH_SHORT).show()
+>>>>>>> github/main
             }
         }
 
