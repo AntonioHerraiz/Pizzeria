@@ -1,8 +1,10 @@
 package com.example.pizzeria
 
+import java.util.*
+
 data class Sugerencia(
-    val id: Int?,
     val name : String,
-    val user_id: Int,
-    val ingredients : String
+    val ingredients : MutableList<String>,
+    val user: User,
+    val fecha: Date
 )

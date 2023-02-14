@@ -75,7 +75,7 @@ class UserProfileFragment : Fragment() {
                     currentUser.email = ""
                     currentUser.password = ""
 
-                    //userList = mutableListOf()
+                    userList = mutableListOf()
 
                     Toast.makeText(requireContext(), "Ha borrado la cuenta", Toast.LENGTH_SHORT).show()
 
