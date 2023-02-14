@@ -1,18 +1,25 @@
 package com.example.pizzeria
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mydailydiet.model.ServiceBuilder
 import com.example.pizzeria.databinding.FragmentMenuBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+private  var mArray : Array<Pizza> = arrayOf()
 
 /**
  * A simple [Fragment] subclass.
@@ -23,16 +30,16 @@ class MenuFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var TAG = "MenuFragment"
     private lateinit var binding: FragmentMenuBinding
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -40,7 +47,6 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMenuBinding.inflate(layoutInflater)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
@@ -48,36 +54,26 @@ class MenuFragment : Fragment() {
         val recyclerView: RecyclerView = binding.menuRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        val cards = arrayOf(
-            Pizza(
-                "4 Quesos",
-                "Queso azul / Mozzarella / Queso brie / Tomate",
-                "https://s4d-images.telepizza.es/Products/Original/4_Quesos-2371.png",
-                8.0
-            ),
-            Pizza(
-                "Jamon queso",
-                "Mozarrella / Jamon york / tomate",
-                "https://newluxbrand.com/wp-content/uploads/2022/01/pizza-jamo%CC%81n-y-queso-Newlux.jpg",
-                7.5
-            ),
-            Pizza(
-                "Barbacoa ",
-                " bacon / jamon / tomate",
-                "https://static.guiainfantil.com/media/6084/c/pizza-barbacoa-un-clasico-para-ninos-md.jpg",
-                8.6
-            ),
-            Pizza(
-                "Champiñón",
-                "champiñon / tomate",
-                "https://www.2mandarinasenmicocina.com/wp-content/uploads/2018/01/pizza-de-champi%C3%B1ones-thermomix-receta.jpg",
-                10.0
-            )
-        )
-        recyclerView.adapter = MenuAdapter(cards)
+        if (mArray.isNullOrEmpty()){
+            ServiceBuilder.initService()
+            val call = ServiceBuilder.service.getPizzas()
+            call.enqueue(object : Callback<Array<Pizza>> {
+                override fun onResponse(call: Call<Array<Pizza>>, response: Response<Array<Pizza>>) {
+                    val body = response.body()
+                    if (response.isSuccessful && body != null) {
+                        mArray = body
+                        Log.d(TAG, "PIZZAS: " + mArray.toString())
+                        recyclerView.adapter = MenuAdapter(mArray)
+                    }
+                }
+                override fun onFailure(call: Call<Array<Pizza>>, t: Throwable) {
+                    Log.e(TAG, "Error obteniendo menús")
+                }
+            })
+        }else{
+            recyclerView.adapter = MenuAdapter(mArray)
+        }
     }
-
-
 
     companion object {
         /**

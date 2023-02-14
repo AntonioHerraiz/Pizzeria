@@ -1,22 +1,43 @@
 <resources>
     <string name="app_name">Pizzeria</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pizzeria">PIZZERIA</string>
     <string name="nombre_local">PIZZERIA TUTI</string>
-    <string name="descripcion_local">Pizzeria familiar italinana, creada en 1866 en Napoles con restaurante en Madrid desde 1998</string>
+    <string name="descripcion_local">Pizzeria familiar italinana, creada en 1866 en Napoles con restaurante en Madrid desde 1998. La especialidad de la casa es la masa, quédate a probar las mejores pizzas y sino encuentras la tuya, háznoslo saber con una sugerencia.</string>
     <string name="direccion_local">Paseo de la Habana 33, 28109, Madrid</string>
-    <string name="name">Nombre : nombre</string>
-    <string name="email">Email : email</string>
     <string name="cerrar">Cerrar sesion</string>
     <string name="delete">Eliminar Cuenta</string>
-    <string name="añadirSugerencia">Añade una sugerencia</string>
+
     <string name="nombrePizza">Nombre de la pizza:</string>
     <string name="checkIngredientes">Selecciona los ingredientes</string>
-    <string name="addBtn">Añadir sugerencia</string>
     <string name="checkboxIng">Ingrediente</string>
+    <string name="alerta">Alerta</string>
+    <string name="seguridad">¿Desea eliminar la cuenta?</string>
+    <string name="cancelar">No</string>
+    <string name="aceptar">Sí</string>
+    <string name="sugerenciasList">Listado de sugerencias</string>
+    <string name="sugerencia">Sugerencia</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="user">Sugerencia añadida por: User</string>
+    <string name="fechaSugerencia">Fecha:</string>
+    <!--Formulario sign up-->
+    <string name="nameForm">Nombre</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="passwordRepeat">Repite la contraseña</string>
+    <string name="signUp">Registrarse</string>
+    <!--Formulario sign in-->
+    <string name="signIn">Iniciar sesión</string>
 
+    <!-- La carta -->
+    <string name="titleMenu">Nuestra carta</string>
+    <string name="pizza">Pizza</string>
+    <string name="price">Precio</string>
 
+    <!-- Sugerencias -->
+    <string name="titleSugerencias">Sugerencias</string>
+    <string name="addSugerencia">Añade una sugerencia</string>
 
+    <string name="seguridadSuge">¿Desea eliminar la sugerencia?</string>
 
 </resources>

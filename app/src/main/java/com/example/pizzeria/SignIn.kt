@@ -1,65 +1,91 @@
 package com.example.pizzeria
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.mydailydiet.model.ServiceBuilder
 import com.example.pizzeria.databinding.ActivitySignInBinding
-import com.example.pizzeria.databinding.ActivitySignUpBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-var currentUser : User = User("", "", "")
+var currentUser = User(id = null, name = "", email = "", password = "")
+
 
 class SignIn : AppCompatActivity() {
-    private lateinit var binding : ActivitySignInBinding
+    var TAG = "SignIn"
+    private lateinit var binding: ActivitySignInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signinBtn.setOnClickListener{
-           if(validate()) {
-               signIn()
-           }
-
+        binding.signInBtn.setOnClickListener {
+                signIn()
         }
 
     }
-    private  fun signIn(){
-        val intent : Intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
-    private fun validate() : Boolean{
+
+
+
+    private fun signIn() {
         var email = binding.emailEditText.text.toString()
         var password = binding.passwordEditText.text.toString()
-        var result = true
 
-        if (email.isEmpty() || password.isEmpty()){
+
+        if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Completa los campos", Toast.LENGTH_SHORT).show()
-            result = false
-        }
 
-        for (user in userList){
-            if (user.email.equals(email) && user.password.equals(password)){
-                Toast.makeText(this, "Inicio de sesión satisfactorio", Toast.LENGTH_SHORT).show()
-                currentUser.name = user.name.toString()
-                currentUser.email = user.email.toString()
-                currentUser.password = user.email.toString()
+        }else{
 
-            }
-            else{
-                result = false
-                Toast.makeText(this, "Error, compruebe sus datos", Toast.LENGTH_SHORT).show()
-                if (!user.email.equals(email)  ){
-                    binding.emailEditText.error = "Correo electrónico incorrecto"
+
+        ServiceBuilder.initService()
+        val call = ServiceBuilder.service.getUsers()
+
+        call.enqueue(object : Callback<Array<User>> {
+            override fun onResponse(call: Call<Array<User>>, response: Response<Array<User>>) {
+                val body = response.body()
+                if (response.isSuccessful && body != null) {
+                    val mArray: Array<User> = body
+
+                    val user = mArray.filter { email == it.email }
+
+                    if (user.size > 0) {
+                        if (user[0].password.equals(password)) {
+                            Log.d(TAG, "Inicio de sesión con éxito")
+                            currentUser = user[0]
+                            val intent: Intent = Intent(this@SignIn, MainActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                this@SignIn,
+                                "Error, compruebe sus datos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            binding.passwordEditText.error = "Contraseña incorrecta"
+                        }
+
+                    } else {
+                        Toast.makeText(
+                            this@SignIn,
+                            "Error, compruebe sus datos",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.emailEditText.error = "Correo electrónico incorrecto"
+                        Log.e(
+                            "TAG",
+                            response.errorBody()?.string()?.let { Log.e("TAG", it) }.toString()
+                        )
+                    }
                 }
-                if (!user.password.equals(password)){
-                    binding.passwordEditText.error = "Contraseña incorrecta"
-                }
             }
-        }
-
-        return  result
+            override fun onFailure(call: Call<Array<User>>, t: Throwable) {
+                Log.e(TAG, "Error obteniendo usuarios")
+            }
+        })
     }
-
+    }
 
 }
