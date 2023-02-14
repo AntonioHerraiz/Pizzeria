@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/green"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/titlePlaylist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center"
+                    android:shadowColor="@color/darkGrey"
+                    android:shadowDx="12"
+                    android:shadowDy="0"
+                    android:shadowRadius="1"
+                    android:text="@string/titleSugerencias"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/addSugerenciaTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/addSugerencia"
+                android:textAlignment="center"
+                android:textColor="@color/darkGrey"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pizzaName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nombrePizza"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/darkGrey" />
+
+                    <EditText
+                        android:id="@+id/nameSugerenciaEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:hint="@string/nameForm"
+                        android:textColorHint="@color/normalGrey"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:minHeight="48dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/lessDarkGrey" />
+
+                    <TextView
+                        android:id="@+id/ingredientsTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/checkIngredientes"
+                        android:textAlignment="center"
+                        android:layout_marginTop="20dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/darkGrey" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ingredientsRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/addSugerenciaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:text="@string/addSugerencia"
+                android:textColor="@color/almostWhite"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/listadoSugerencias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:text="@string/sugerenciasList"
+                android:textAlignment="center"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sugerenciasRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
